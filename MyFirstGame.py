@@ -3,12 +3,15 @@ from sys import exit
 
 pygame.init()
 screen = pygame.display.set_mode((800,400))
-pygame.display.set_caption("Parkour Jumpgi")
+pygame.display.set_caption("Parkour Jump")
 clock = pygame.time.Clock()
 
-test_surface = pygame.Surface((100,200))
-test_surface.fill("Red")
-test_image = pygame.image.load("")
+sky_surface = pygame.Surface((800,400))
+sky_surface.fill("darkslategray1")
+ground_surface = pygame.Surface((800,60))
+ground_surface.fill("saddlebrown")
+grass_surface = pygame.Surface((800,10))
+grass_surface.fill("green3")
 
 while True:
     for event in pygame.event.get():
@@ -16,7 +19,9 @@ while True:
             pygame.quit()
             exit()
 
-    screen.blit(test_surface,(350,100))
+    screen.blit(sky_surface,(0,0))
+    screen.blit(ground_surface,(0,340))
+    screen.blit(grass_surface,(0,340))
 
     pygame.display.update()
     clock.tick(60)
