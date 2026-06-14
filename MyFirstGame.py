@@ -24,16 +24,21 @@ obstacle_x_pos = 800
 player_surface = pygame.Surface((50,50))
 player_surface.fill("blue")
 player_rect = player_surface.get_rect(bottomleft = (150,340))
+player_gravity = 0
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            print("mousedown")
-        if event.type == pygame.KEYDOWN
-            print("keydown")
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                player_gravity = -20
+        if player_rect.collidepoint((pygame.mouse.get_pos())):
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                player_gravity = -20
+        if event.type == pygame.KEYUP:
+            print("keyup")
 
     screen.blit(sky_surface,(0,0))
     screen.blit(ground_surface,(0,340))
@@ -41,25 +46,14 @@ while True:
     pygame.draw.rect(screen, "#c0e8ec", text_rect)
     screen.blit(text_surface,text_rect)
 
-    # player_rect.y
+    player_gravity += 1
+    player_rect.y += player_gravity
     screen.blit(player_surface,player_rect)
 
     obstacle_rect.x -= 5
     if obstacle_rect.right <= 0:
         obstacle_rect.left = 800
     screen.blit(obstacle_surface,obstacle_rect)
-
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_SPACE]:
-        print("jump")
-
-    #if player_rect.colliderect(obstacle_rect):
-    #    print("collision")
-
-    mouse_pos = pygame.mouse.get_pos()
-    if player_rect.collidepoint((mouse_pos)):
-        print(pygame.mouse.get_pressed())
-
 
     pygame.display.update()
     clock.tick(60)
