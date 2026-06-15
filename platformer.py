@@ -32,7 +32,8 @@ while True:
     player_gravity += 1
     player_rect.y += player_gravity
     if player_rect.colliderect(floor_rect):
-        player_rect.bottom = player_rect.bottom
+        player_rect.bottom = floor_rect.top
+        player_gravity = 0
     screen.blit(player_surface, player_rect)
 
     pygame.display.update()
