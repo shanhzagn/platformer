@@ -25,17 +25,16 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                player_gravity = -15
+        if player_rect.y >= 30:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    player_gravity = -15
         if player_rect.x >= 0:
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    player_x = -15
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
+                player_x = -15
         if player_rect.x <= 800:
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    player_x = 15
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
+                player_x = 15
 
 
 
