@@ -19,23 +19,27 @@ player_surface.fill("blue")
 player_rect = player_surface.get_rect(bottomleft = (150,380))
 player_gravity = 0
 player_x = 0
+player_velocity = 0
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-        if player_rect.y >= 30:
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    player_gravity = -15
-        if player_rect.x >= 0:
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-                player_x = -15
-        if player_rect.x <= 800:
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-                player_x = 15
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP and player_rect.y >= 30:
+                player_gravity = -15
 
+    keys = pygame.key.get_pressed()
+    realtime_keys = []
+    if player_rect.x >= 0:
+        if keys[pygame.K_LEFT]:
+            player_x += (-6-player_x*0.7)
+    if player_rect.x <= 800:
+        if keys[pygame.K_RIGHT]:
+            player_x += (6-player_x*0.7)
+    player_velocity = abs(player_x)
+    #print(player_velocity)
 
 
     screen.blit(background_surface,(0,0))
